@@ -9,36 +9,57 @@ export const portfolio = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: Rule => Rule.required()
+      validation: Rule => Rule.required(),
     }),
+
     defineField({
       name: 'description',
       title: 'Description',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [
+        { type: 'block' },
+        {
+          type: 'image',
+          options: {
+            hotspot: true, // bisa crop & focus image
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description: 'Alternative text for accessibility',
+            },
+          ],
+        },
+      ],
     }),
+
     defineField({
       name: 'tools',
       title: 'Tools',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [{ type: 'string' }],
     }),
+
     defineField({
       name: 'view',
       title: 'Project URL',
-      type: 'url'
+      type: 'url',
     }),
+
     defineField({
       name: 'order',
       title: 'Order',
-      type: 'number'
-    })
+      type: 'number',
+    }),
   ],
+
   orderings: [
     {
       title: 'Order Asc',
       name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }]
-    }
-  ]
+      by: [{ field: 'order', direction: 'asc' }],
+    },
+  ],
 })
